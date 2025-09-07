@@ -1,0 +1,38 @@
+if status is-interactive
+    set -gx ZELLIJ_AUTO_ATTACH true
+    if not set -q ZELLIJ
+        if test "$ZELLIJ_AUTO_ATTACH" = true
+            zellij attach --create main
+        else
+            zellij --session main
+        end
+        # if test "$ZELLIJ_AUTO_EXIT" = true
+        #     kill $fish_pid
+        # end
+    end
+
+    set fish_greeting ""
+    starship init fish | source
+    zoxide init fish --cmd cd | source
+    source ~/.config/fish/atuin.fish
+end
+
+fish_add_path /home/wasd/architect/scripts
+
+abbr -a c chezmoi
+abbr -a n nvim
+abbr -a x nvim
+abbr -a j just
+abbr -a py python
+abbr -a wl wl-copy
+abbr -a rm 'rm -rf'
+abbr -a .. 'cd ..'
+abbr -a ... 'cd ../..'
+abbr -a .... 'cd ../../..'
+abbr -a ..... 'cd ../../../..'
+
+source ~/.config/fish/functions.fish
+bind \co '$HOME/architect/scripts/prompt-selector-fzf'
+set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
+set -gx PATH $HOME/.cabal/bin /home/wasd/.ghcup/bin $PATH # ghcup-env
+set -gx RUSTUP_TOOLCHAIN nightly

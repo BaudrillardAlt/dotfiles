@@ -1,4 +1,4 @@
 --theme='modus_vivendi'
 --style="plain"
-
---paging=auto
+--paging=never
+--wrap=never

@@ -1,1 +1,6 @@
 .git/
+.jj/
+.cache/
+.build/
+.target/
+

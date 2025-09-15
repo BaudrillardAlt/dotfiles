@@ -1,29 +1,30 @@
-max-history=20
-sort=-time
-border-radius=10
-border-size=5
-font=Inter 10
-height=120
-margin=10
-outer-margin=20
-padding=12,16
-width=400
-icons=1
-icon-location=left
-markup=1
-actions=1
-history=1
-text-alignment=left
+text-color=#ff9999
+border-color=#ff00ff
+background-color=#0a0a0aee
+progress-color=#ff3333
+
+font=JetBrainsMono Nerd Font 12
+width=420
+height=110
+padding=10
+border-size=2
+border-radius=5
+anchor=top-right
 default-timeout=5000
 
-anchor=top-right
-layer=top
+[urgency=low]
+border-color=#cc00ff
 
-on-button-left=invoke-default-action
-on-button-middle=dismiss
-on-button-right=dismiss-all
-on-touch=dismiss
+[urgency=normal]
+border-color=#ff00ff
 
-background-color=#16181a
-border-color=#5ef1ff
-progress-color=over #bd5eff
+[urgency=high]
+border-color=#ff3333
+background-color=#1a0a0aee
+text-color=#ffcccc
+
+[app-name=Spotify]
+invisible=1
+
+[mode=do-not-disturb]
+invisible=1

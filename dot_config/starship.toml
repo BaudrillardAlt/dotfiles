@@ -30,7 +30,6 @@ format = '[@](bold purple) [$path]($style)[$read_only]($read_only_style) '
 style = "bold purple"
 read_only_style = "red"
 
-# JJ via starship-jj (fast). Requires: cargo install starship-jj --locked
 [custom.jj]
 command = "prompt"
 format = "$output"
@@ -38,9 +37,7 @@ ignore_timeout = true
 shell = ["starship-jj", "--ignore-working-copy", "starship"]
 use_stdin = false
 when = true
-symbol = " "
 
-# Disable native Git modules; re-expose them only outside JJ repos
 [git_status]
 disabled = true
 [git_commit]

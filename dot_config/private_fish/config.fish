@@ -1,3 +1,10 @@
+if status is-login
+    if test -z "$WAYLAND_DISPLAY"; and set -q XDG_VTNR; and test "$XDG_VTNR" -eq 1; and uwsm check may-start
+        set -x NIRI_DISABLE_SYSTEM_MANAGER_NOTIFY 1
+        exec uwsm start -- /usr/bin/niri --session
+    end
+end
+
 if status is-interactive
     set -gx ZELLIJ_AUTO_ATTACH true
     if not set -q ZELLIJ
@@ -6,33 +13,38 @@ if status is-interactive
         else
             zellij --session main
         end
-        # if test "$ZELLIJ_AUTO_EXIT" = true
-        #     kill $fish_pid
-        # end
     end
-
     set fish_greeting ""
+    set fish_key_bindings fish_vi_key_bindings
     starship init fish | source
     zoxide init fish --cmd cd | source
     source ~/.config/fish/atuin.fish
 end
 
-fish_add_path /home/wasd/architect/scripts
+set -gx PAGER "bat --style=plain"
+set -gx BAT_PAGER "ov -F -H3"
+set -gx MANPAGER "ov --section-delimiter '^[^\s]' --section-header"
+set -gx FZF_DEFAULT_COMMAND "fd --type file --follow --exclude .git"
+set -gx RUSTUP_TOOLCHAIN nightly
 
-abbr -a c chezmoi
-abbr -a n nvim
-abbr -a x nvim
+abbr -a c y
+abbr -a cp cp -rv
+abbr -a dot chezmoi
+abbr -a s sendchat
+
+abbr -a n nv
+abbr -a nvim nv
+abbr -a x nv
 abbr -a j just
 abbr -a py python
 abbr -a wl wl-copy
-abbr -a rm 'rm -rf'
+abbr -a rm 'rm -r'
 abbr -a .. 'cd ..'
 abbr -a ... 'cd ../..'
 abbr -a .... 'cd ../../..'
 abbr -a ..... 'cd ../../../..'
 
 source ~/.config/fish/functions.fish
-bind \co '$HOME/architect/scripts/prompt-selector-fzf'
-set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
-set -gx PATH $HOME/.cabal/bin /home/wasd/.ghcup/bin $PATH # ghcup-env
-set -gx RUSTUP_TOOLCHAIN nightly
+
+fish_add_path /home/wasd/architect/scripts
+fish_add_path $CARGO_HOME/bin

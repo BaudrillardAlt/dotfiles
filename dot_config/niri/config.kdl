@@ -1,4 +1,4 @@
-// https://github.com/YaLTeR/niri/wiki/Configuration:-Introduction
+spawn-at-startup "uwsm" "finalize" "NIRI_SOCKET" "DISPLAY" "XCURSOR_THEME" "XCURSOR_SIZE"
 input {
     keyboard {
         xkb {
@@ -40,6 +40,7 @@ output "HDMI-A-1" {
 layout {
     background-color "transparent"
     gaps 6
+    // default-column-display "tabbed"
     always-center-single-column
     center-focused-column "never"
     preset-column-widths {
@@ -47,17 +48,17 @@ layout {
     }
     focus-ring {
         width 1
-        active-gradient from="#44475a" to="#bd93f9" angle=45 relative-to="workspace-view" in="oklch longer hue"
-        inactive-color "44475aaa"
+        active-color "#f9e2af"
+        inactive-color "transparent"
+        active-gradient from="#E5989B" to="#FFB4A2" angle=45 relative-to="workspace-view" in="oklch longer hue"
     }
     border {
-        off
-        width 2
-        active-color "#f38ba8"
-        inactive-color "#5b4e65"
+        width 1
+        active-color "#6c7086"
+        inactive-color "#6c7086"
+        active-gradient from="#E5989B" to="#FFB4A2" angle=45 relative-to="workspace-view" in="oklch longer hue"
     }
     tab-indicator {
-        hide-when-single-tab
         place-within-column
         inactive-color "#585b70"
         gap 4
@@ -65,7 +66,8 @@ layout {
         gaps-between-tabs 2
     }
     insert-hint {
-        gradient from="#5ef1ff70" to="#bd5eff70" angle=45
+        color "#ffc87f80"
+        gradient from="#f38ba880" to="#f9e2af80" angle=45 relative-to="workspace-view"
     }
     shadow {
         softness 30
@@ -79,24 +81,20 @@ layout {
 }
 screenshot-path "~/misc/screenshots/screenshot-%Y-%m-%d-%H-%M-%S.png"
 animations {
-    slowdown 0.8
-}
-// https://github.com/YaLTeR/niri/wiki/Configuration:-Window-Rules
-window-rule {
-    match app-id="^org\\.wezfurlong\\.wezterm$"
-    default-column-width {
-
-    }
+    slowdown 0.7
 }
 window-rule {
     match app-id="^org.pulseaudio.pavucontrol$"
-    default-column-width {
-        proportion 0.33333
-    }
+    open-floating true
+    min-width 900
+    min-height 700
 }
 window-rule {
     match app-id="firefox-nightly"
     open-maximized true
+}
+window-rule {
+    match app-id="neovide"
 }
 window-rule {
     match app-id="firefox-nightly" title="^Picture-in-Picture$"
@@ -108,19 +106,34 @@ window-rule {
 }
 binds {
     Mod+Return hotkey-overlay-title="OpenTerminal" {
-        spawn "nirius" "focus-or-spawn" "-a" "kitty" "uwsm" "app" "kitty"
+        spawn-sh "nirius focus-or-spawn -a foot app2unit-term"
+    }
+    Mod+Shift+Return hotkey-overlay-title="OpenTerminal" {
+        spawn-sh "nirius focus-or-spawn -a neovide nv"
+    }
+    Mod+S hotkey-overlay-title="SendChat" {
+        spawn-sh "~/architect/scripts/sendchat"
     }
     Mod+B hotkey-overlay-title="OpenBook" {
-        spawn "sh" "-c" "~/architect/scripts/openbook"
+        spawn-sh "~/architect/scripts/openbook"
     }
     Mod+D hotkey-overlay-title="RunApplication" {
         spawn "fuzzel"
     }
     Mod+Tab hotkey-overlay-title="FocusMarked" {
-        spawn "nirius" "focus-marked"
+        focus-column-right-or-first
     }
-    Mod+a hotkey-overlay-title="ToggleMark" {
-        spawn "nirius" "toggle-mark"
+    Mod+Shift+Tab hotkey-overlay-title="focus-column-left-or-last" {
+        focus-column-left-or-last
+    }
+    Mod+Ctrl+M hotkey-overlay-title="send to next monitor" {
+        move-window-to-monitor-next
+    }
+    Mod+M hotkey-overlay-title="ToggleMark" {
+        spawn-sh "notify-send \"$(nirius toggle-mark)\""
+    }
+    Mod+Shift+M hotkey-overlay-title="ToggleMark" {
+        spawn-sh "nirius focus-marked"
     }
     Mod+Shift+Escape hotkey-overlay-title="ShowHotkeyOverlay" {
         show-hotkey-overlay
@@ -131,11 +144,6 @@ binds {
     Mod+Alt+L hotkey-overlay-title="LockScreen" {
         spawn "swaylock"
     }
-    // You can also use a shell. Do this if you need pipes, multiple commands, etc.
-    // Note: the entire command goes as a single argument in the end.
-    // Mod+T { spawn "bash" "-c" "notify-send hello && exec alacritty"; }
-    // Example volume keys mappings for PipeWire & WirePlumber.
-    // The allow-when-locked=true property makes them work even when the session is locked.
     XF86AudioRaiseVolume allow-when-locked=true {
         spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"
     }
@@ -155,28 +163,28 @@ binds {
         close-window
     }
     Mod+Left {
-        focus-column-left
+        focus-column-left-or-last
     }
     Mod+Down {
-        focus-window-down
+        focus-window-down-or-top
     }
     Mod+Up {
-        focus-window-up
+        focus-window-up-or-bottom
     }
     Mod+Right {
-        focus-column-right
+        focus-column-right-or-first
     }
     Mod+H {
-        focus-column-left
+        focus-column-left-or-last
     }
     Mod+J {
-        focus-window-down
+        focus-window-down-or-column-left
     }
     Mod+K {
-        focus-window-up
+        focus-window-up-or-column-right
     }
     Mod+L {
-        focus-column-right
+        focus-column-right-or-first
     }
     Mod+Ctrl+Left {
         move-column-left
@@ -202,12 +210,6 @@ binds {
     Mod+Ctrl+L {
         move-column-right
     }
-    // Alternative commands that move across workspaces when reaching
-    // the first or last window in a column.
-    // Mod+J     { focus-window-or-workspace-down; }
-    // Mod+K     { focus-window-or-workspace-up; }
-    // Mod+Ctrl+J     { move-window-down-or-to-workspace-down; }
-    // Mod+Ctrl+K     { move-window-up-or-to-workspace-up; }
     Mod+Home {
         focus-column-first
     }
@@ -223,23 +225,11 @@ binds {
     Mod+Shift+Left {
         focus-monitor-left
     }
-    Mod+Shift+Down {
-        focus-monitor-down
-    }
-    Mod+Shift+Up {
-        focus-monitor-up
-    }
     Mod+Shift+Right {
         focus-monitor-right
     }
     Mod+Shift+H {
         focus-monitor-left
-    }
-    Mod+Shift+J {
-        focus-monitor-down
-    }
-    Mod+Shift+K {
-        focus-monitor-up
     }
     Mod+Shift+L {
         focus-monitor-right
@@ -247,23 +237,11 @@ binds {
     Mod+Shift+Ctrl+Left {
         move-column-to-monitor-left
     }
-    Mod+Shift+Ctrl+Down {
-        move-column-to-monitor-down
-    }
-    Mod+Shift+Ctrl+Up {
-        move-column-to-monitor-up
-    }
     Mod+Shift+Ctrl+Right {
         move-column-to-monitor-right
     }
     Mod+Shift+Ctrl+H {
         move-column-to-monitor-left
-    }
-    Mod+Shift+Ctrl+J {
-        move-column-to-monitor-down
-    }
-    Mod+Shift+Ctrl+K {
-        move-column-to-monitor-up
     }
     Mod+Shift+Ctrl+L {
         move-column-to-monitor-right
@@ -427,13 +405,6 @@ binds {
     Mod+Ctrl+9 {
         move-column-to-workspace 9
     }
-    // Mod+Ctrl+1 { move-window-to-workspace 1; }
-    // Alternatively, there are commands to move just a single window:
-    // Switches focus between the current and the previous workspace.
-    // Mod+Tab { focus-workspace-previous; }
-    // The following binds move the focused window in and out of a column.
-    // If the window is alone, they will consume it into the nearby column to the side.
-    // If the window is already in a column, they will expel it out.
     Mod+BracketLeft {
         consume-or-expel-window-left
     }
@@ -458,13 +429,10 @@ binds {
         reset-window-height
     }
     Mod+Space {
-        maximize-column
+        spawn "~/.config/niri/scripts/maximize-fill"
     }
     Mod+Shift+Space {
         fullscreen-window
-    }
-    Mod+Ctrl+Space {
-        expand-column-to-available-width
     }
     Mod+Z {
         center-column
@@ -501,10 +469,10 @@ binds {
     Mod+Shift+F {
         switch-focus-between-floating-and-tiling
     }
-    // Toggle tabbed column display mode.
-    // Windows in this column will appear as vertical tabs,
-    // rather than stacked on top of each other.
-    Mod+W {
+    Mod+Grave {
+        switch-focus-between-floating-and-tiling
+    }
+    Mod+t {
         toggle-column-tabbed-display
     }
     // Actions to switch layouts.
@@ -514,6 +482,9 @@ binds {
     // since it will switch twice upon pressing the hotkey (once by xkb, once by niri).
     // Mod+Space       { switch-layout "next"; }
     // Mod+Shift+Space { switch-layout "prev"; }
+    Mod+Ctrl+Space {
+        focus-monitor-next
+    }
     Print {
         screenshot
     }
@@ -528,7 +499,7 @@ binds {
     Mod+Escape allow-inhibiting=false {
         toggle-keyboard-shortcuts-inhibit
     }
-    Mod+Shift+E {
+    Mod+Shift+K {
         quit
     }
     Ctrl+Alt+Delete {
@@ -549,9 +520,7 @@ environment {
     DISPLAY ":0"
 }
 prefer-no-csd
-spawn-at-startup "/usr/lib/polkit-kde-authentication-agent-1" "&"
-spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
-spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
-spawn-at-startup "niriusd"
-spawn-at-startup "uwsm" "finalize" "NIRI_SOCKET" "DISPLAY" "XCURSOR_THEME" "XCURSOR_SIZE"
+spawn-at-startup "app2unit" "-t" "service" "niriusd"
+spawn-at-startup "app2unit" "wl-paste" "--type" "text" "--watch" "cliphist" "store"
+spawn-at-startup "app2unit" "wl-paste" "--type" "image" "--watch" "cliphist" "store"
 

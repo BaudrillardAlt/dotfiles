@@ -1,42 +1,8 @@
-export XDG_CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
-export XDG_DATA_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"
-export XDG_CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
-export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$UID}"
-
-export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
-export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/config"
-
-export GOPATH="$XDG_DATA_HOME/go"
-export CARGO_HOME="$XDG_DATA_HOME/cargo"
-export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
-
-export NPM_CONFIG_INIT_MODULE="$XDG_CONFIG_HOME/npm/config/npm-init.js"
-export NPM_CONFIG_CACHE="$XDG_CACHE_HOME/npm"
-export NPM_CONFIG_TMP="$XDG_RUNTIME_DIR/npm"
-
-export EDITOR=nvim
-export VISUAL=nvim
-export PAGER="bat --paging=always --style=plain"
-
-export FZF_DEFAULT_COMMAND="fd --type file --follow --exclude .git"
-export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
-  --highlight-line \
-  --info=inline-right \
-  --ansi \
-  --layout=reverse \
-  --color=bg+:#3c4048,bg:#000000,spinner:#ff5ea0,hl:#5eff6c \
-  --color=fg:#ffffff,header:#5ea1ff,info:#f1ff5e,pointer:#ff5ef1 \
-  --color=marker:#5eff6c,fg+:#ffffff,prompt:#5ef1ff,hl+:#5eff6c \
-  --color=selected-bg:#1e2124 \
-  --color=border:#7b8496,label:#ffffff"
-
-export XDG_SESSION_TYPE="wayland"
-export XDG_CURRENT_DESKTOP="niri"
-export DISPLAY=":0"
-export GDK_BACKEND="wayland"
 export ELECTRON_OZONE_PLATFORM_HINT="wayland"
-export QT_QPA_PLATFORM="wayland;xcb"
+export GDK_BACKEND="wayland"
+export QT_AUTO_SCREEN_SCALE_FACTOR="1"
+export QT_QPA_PLATFORM="wayland"
 export QT_QPA_PLATFORMTHEME="qt6ct"
 export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
-export QT_AUTO_SCREEN_SCALE_FACTOR="1"
+export XDG_SESSION_TYPE="wayland"
+export APP2UNIT_SLICES='a=app-graphical.slice b=background-graphical.slice s=session-graphical.slice'

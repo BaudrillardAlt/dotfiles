@@ -9,11 +9,17 @@ keybinds clear-defaults=true {
         bind "Alt Tab" {
             FocusNextPane
         }
-        bind "Alt Shift q" {
+        bind "Alt q" {
             CloseFocus
+        }
+        bind "Alt Shift q" {
+            CloseTab
         }
         bind "Ctrl /" {
             ToggleFloatingPanes
+        }
+        bind "Ctrl Alt /" {
+            SwitchToMode "entersearch"
         }
         bind "Ctrl Tab" {
             GoToNextTab
@@ -24,6 +30,12 @@ keybinds clear-defaults=true {
         }
         bind "Alt Enter" {
             NewPane
+        }
+        bind "Ctrl p" {
+            Run "bash" "-lc" "$HOME/architect/scripts/prompt-selector-fzf" {
+                in_place true
+                close_on_exit true
+            }
         }
         bind "Alt 1" {
             GoToTab 1
@@ -456,7 +468,7 @@ keybinds clear-defaults=true {
         }
     }
     shared_except "locked" "pane" {
-        bind "Ctrl p" {
+        bind "Ctrl Alt p" {
             SwitchToMode "pane"
         }
     }
@@ -686,7 +698,7 @@ copy_command "wl-copy"
 copy_on_select true
 // Path to the default editor to use to edit pane scrollbuffer
 // Default: $EDITOR or $VISUAL
-scrollback_editor "/usr/bin/nvim --nofork"
+// scrollback_editor "/usr/bin/nvim --nofork"
 // A fixed name to always give the Zellij session.
 // Consider also setting `attach_to_session true,`
 // otherwise this will error if such a session exists.

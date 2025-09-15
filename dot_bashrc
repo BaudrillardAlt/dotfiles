@@ -1,0 +1,5 @@
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+unset HISTFILE
+PS1='[\u@\h \W]\$ '

@@ -44,20 +44,6 @@ function nm --wraps llvm-nm --description 'Alias for llvm-nm'
     command llvm-nm $argv
 end
 
-function xx
-    set file (fd --type f --hidden --exclude .git | fzf --preview 'bat --color=always --style=numbers {}')
-    if test -n "$file"
-        uwsm app -- nvim "$file"
-    end
-end
-
-function cf
-    set dir (fd --type d --exclude .git | fzf --height 20 --preview 'eza --tree --level=1 --color=always {}')
-    if test -n "$dir"
-        cd "$dir"
-    end
-end
-
 function exit_if_empty
     if test -z (commandline)
         exit
@@ -78,10 +64,23 @@ function backup -a filename
     mv -n -- "$filename" "$filename.bak"
 end
 
-function cpr
-    rsync -aHAX --info=NAME,PROGRESS2 --human-readable --no-inc-recursive -- $argv
+function clip
+    if test (count $argv) -eq 0
+        return 1
+    end
+    for f in $argv
+        if test -f $f
+            set full (realpath $f)
+            echo "== file: $full =="
+            cat $f
+        end
+    end | wl-copy
 end
 
 function xc
-    chezmoi edit --verbose --apply
+    chezmoi edit --verbose
+end
+
+function cz
+    cdi
 end

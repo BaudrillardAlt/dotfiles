@@ -21,24 +21,20 @@ if status is-interactive
     source ~/.config/fish/atuin.fish
 end
 
-set -gx PAGER "bat --style=plain"
-set -gx BAT_PAGER "ov -F -H3"
-set -gx MANPAGER "ov --section-delimiter '^[^\s]' --section-header"
 set -gx FZF_DEFAULT_COMMAND "fd --type file --follow --exclude .git"
-set -gx RUSTUP_TOOLCHAIN nightly
 
-abbr -a c y
 abbr -a cp cp -rv
+abbr -a rm rm -rv
 abbr -a dot chezmoi
 abbr -a s sendchat
 
 abbr -a n nv
-abbr -a nvim nv
+abbr -a vim nv
 abbr -a x nv
 abbr -a j just
 abbr -a py python
 abbr -a wl wl-copy
-abbr -a rm 'rm -r'
+
 abbr -a .. 'cd ..'
 abbr -a ... 'cd ../..'
 abbr -a .... 'cd ../../..'

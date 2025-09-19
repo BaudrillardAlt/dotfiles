@@ -81,6 +81,14 @@ function xc
     chezmoi edit --verbose
 end
 
+function xn
+    ynv ~/.config/nvim/
+end
+
 function cz
     cdi
+end
+
+function nano
+    nv
 end

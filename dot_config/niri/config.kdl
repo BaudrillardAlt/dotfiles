@@ -22,7 +22,7 @@ input {
         // scroll-method "no-scroll"
 
     }
-    focus-follows-mouse
+    focus-follows-mouse max-scroll-amount="5%"
     workspace-auto-back-and-forth
 }
 output "eDP-1" {
@@ -48,26 +48,23 @@ layout {
     }
     focus-ring {
         width 1
-        active-color "#f9e2af"
-        inactive-color "transparent"
-        active-gradient from="#E5989B" to="#FFB4A2" angle=45 relative-to="workspace-view" in="oklch longer hue"
+        active-gradient from="#0057d1" to="#a018ff" angle=45 in="oklch increasing hue"
+        inactive-gradient from="#7b8496" to="#3c4048" angle=135
     }
     border {
-        width 1
-        active-color "#6c7086"
-        inactive-color "#6c7086"
-        active-gradient from="#E5989B" to="#FFB4A2" angle=45 relative-to="workspace-view" in="oklch longer hue"
+        width 2
+        active-gradient from="#0057d1" to="#a018ff" angle=45 in="oklch increasing hue"
+        inactive-gradient from="#7b8496" to="#3c4048" angle=135
     }
     tab-indicator {
-        place-within-column
-        inactive-color "#585b70"
-        gap 4
-        width 2
-        gaps-between-tabs 2
+        active-color "#5ef1ff90"
+        inactive-color "#7b849690"
+        width 8
+        gap 8
+        length total-proportion=0.33
     }
     insert-hint {
-        color "#ffc87f80"
-        gradient from="#f38ba880" to="#f9e2af80" angle=45 relative-to="workspace-view"
+        gradient from="#5ef1ff70" to="#bd5eff70" angle=45
     }
     shadow {
         softness 30
@@ -75,13 +72,15 @@ layout {
         offset x=0 y=5
         color "#0007"
     }
-    struts {
-
-    }
 }
 screenshot-path "~/misc/screenshots/screenshot-%Y-%m-%d-%H-%M-%S.png"
 animations {
-    slowdown 0.7
+    slowdown 0.6
+}
+window-rule {
+    exclude app-id="firefox-nightly"
+    match is-active=false
+    opacity 0.94
 }
 window-rule {
     match app-id="^org.pulseaudio.pavucontrol$"
@@ -90,8 +89,15 @@ window-rule {
     min-height 700
 }
 window-rule {
-    match app-id="firefox-nightly"
-    open-maximized true
+    match app-id="foot.yazi"
+    open-floating true
+    default-column-width {
+        fixed 2400
+    }
+    default-window-height {
+        fixed 1200
+    }
+    default-floating-position x=130 y=140
 }
 window-rule {
     match app-id="neovide"
@@ -101,7 +107,7 @@ window-rule {
     open-floating true
 }
 window-rule {
-    geometry-corner-radius 10
+    geometry-corner-radius 1
     clip-to-geometry true
 }
 binds {
@@ -120,6 +126,9 @@ binds {
     Mod+D hotkey-overlay-title="RunApplication" {
         spawn "fuzzel"
     }
+    Mod+Grave {
+        switch-focus-between-floating-and-tiling
+    }
     Mod+Tab hotkey-overlay-title="FocusMarked" {
         focus-column-right-or-first
     }
@@ -129,17 +138,17 @@ binds {
     Mod+Ctrl+M hotkey-overlay-title="send to next monitor" {
         move-window-to-monitor-next
     }
-    Mod+M hotkey-overlay-title="ToggleMark" {
+    Mod+Shift+M hotkey-overlay-title="ToggleMark" {
         spawn-sh "notify-send \"$(nirius toggle-mark)\""
     }
-    Mod+Shift+M hotkey-overlay-title="ToggleMark" {
+    Mod+M hotkey-overlay-title="ToggleMark" {
         spawn-sh "nirius focus-marked"
     }
     Mod+Shift+Escape hotkey-overlay-title="ShowHotkeyOverlay" {
         show-hotkey-overlay
     }
-    Mod+C hotkey-overlay-title="ClipboardHistory" {
-        spawn "sh" "-c" "cliphist list | fuzzel --dmenu --width 80 | cliphist decode | wl-copy"
+    Mod+C repeat=false hotkey-overlay-title="ClipboardHistory" {
+        spawn "sh" "-c" "cliphist list | fuzzel --dmenu --width 100 | cliphist decode | wl-copy"
     }
     Mod+Alt+L hotkey-overlay-title="LockScreen" {
         spawn "swaylock"
@@ -223,16 +232,16 @@ binds {
         move-column-to-last
     }
     Mod+Shift+Left {
-        focus-monitor-left
+        focus-monitor-previous
     }
     Mod+Shift+Right {
-        focus-monitor-right
+        focus-monitor-next
     }
     Mod+Shift+H {
-        focus-monitor-left
+        focus-monitor-previous
     }
     Mod+Shift+L {
-        focus-monitor-right
+        focus-monitor-next
     }
     Mod+Shift+Ctrl+Left {
         move-column-to-monitor-left
@@ -469,10 +478,7 @@ binds {
     Mod+Shift+F {
         switch-focus-between-floating-and-tiling
     }
-    Mod+Grave {
-        switch-focus-between-floating-and-tiling
-    }
-    Mod+t {
+    Mod+W {
         toggle-column-tabbed-display
     }
     // Actions to switch layouts.
@@ -482,7 +488,7 @@ binds {
     // since it will switch twice upon pressing the hotkey (once by xkb, once by niri).
     // Mod+Space       { switch-layout "next"; }
     // Mod+Shift+Space { switch-layout "prev"; }
-    Mod+Ctrl+Space {
+    Mod+Ctrl+Tab {
         focus-monitor-next
     }
     Print {
@@ -499,8 +505,8 @@ binds {
     Mod+Escape allow-inhibiting=false {
         toggle-keyboard-shortcuts-inhibit
     }
-    Mod+Shift+K {
-        quit
+    Mod+Ctrl+Alt+K {
+        spawn-sh "uwsm stop -r niri"
     }
     Ctrl+Alt+Delete {
         quit
@@ -521,6 +527,8 @@ environment {
 }
 prefer-no-csd
 spawn-at-startup "app2unit" "-t" "service" "niriusd"
+spawn-at-startup "app2unit" "-t" "service" "wbg" "/home/wasd/.config/niri/wallpapers/haha.png"
+spawn-at-startup "app2unit" "-t" "service" "/usr/lib/polkit-kde-authentication-agent-1"
 spawn-at-startup "app2unit" "wl-paste" "--type" "text" "--watch" "cliphist" "store"
 spawn-at-startup "app2unit" "wl-paste" "--type" "image" "--watch" "cliphist" "store"
 

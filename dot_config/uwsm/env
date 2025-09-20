@@ -1,0 +1,24 @@
+export ELECTRON_OZONE_PLATFORM_HINT="wayland"
+export GDK_BACKEND="wayland"
+export QT_AUTO_SCREEN_SCALE_FACTOR="1"
+export QT_QPA_PLATFORM="wayland"
+export QT_QPA_PLATFORMTHEME="qt6ct"
+export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+export XDG_SESSION_TYPE="wayland"
+export NV=/tmp/nv  
+export NVIM_LISTEN_ADDRESS=/tmp/nv  
+export EDITOR=nv  
+export VISUAL=nv
+export APP2UNIT_SLICES='a=app-graphical.slice b=background-graphical.slice s=session-graphical.slice'
+
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+  --highlight-line \
+  --cycle
+  --layout=reverse
+  --height 80%
+  --color=fg:-1,fg+:#ffffff,bg:-1,bg+:#3c4048 \
+  --color=hl:#5ea1ff,hl+:#5ef1ff,info:#ffbd5e,marker:#5eff6c \
+  --color=prompt:#ff5ef1,spinner:#bd5eff,pointer:#ff5ea0,header:#5eff6c \
+  --color=gutter:-1,border:#3c4048,scrollbar:#7b8496,label:#7b8496 \
+  --color=query:#ffffff \
+"

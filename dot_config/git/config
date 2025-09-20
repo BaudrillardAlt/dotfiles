@@ -1,0 +1,28 @@
+[user]
+	email = 230780735+BaudrillardAlt@users.noreply.github.com
+	name = BaudilliardAlt
+[color]
+  ui = auto
+[core]
+	preloadIndex = true
+[commit]
+	verbose = true
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+[init]
+	defaultBranch = main
+[diff]
+	external = difft
+	tool = difftastic
+[merge]
+  conflictstyle = zdiff3
+[difftool "difftastic"]
+    cmd = difft "$LOCAL" "$REMOTE"
+[difftool]
+    prompt = false
+
+[pager]
+    difftool = true

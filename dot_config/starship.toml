@@ -1,0 +1,103 @@
+palette = "dracula"
+add_newline = false
+command_timeout = 1000
+
+format = """$os$directory${custom.jj}${custom.git_branch}${custom.git_status}${custom.git_commit}${custom.git_metrics}$c$lua$zig$python$rust$nix_shell
+$character"""
+
+[os]
+format = '[󰣇](bold blue) '
+disabled = false
+
+[os.symbols]
+Arch = '󰣇'
+
+[character]
+success_symbol = "[ ](fg:purple) [λ](fg:green)"
+error_symbol = "[ λ](fg:red)"
+vimcmd_symbol = "[  ❮](bold fg:green)"
+vimcmd_visual_symbol = "[  ▼](bold fg:yellow)"
+vimcmd_replace_symbol = "[  ](bold fg:purple)"
+vimcmd_replace_one_symbol = "[  ](bold fg:purple)"
+format = "$symbol "
+
+[directory]
+truncation_length = 5
+truncation_symbol = '…/'
+home_symbol = '󰋜 ~'
+read_only = '  '
+format = '[@](bold purple) [$path]($style)[$read_only]($read_only_style) '
+style = "bold purple"
+read_only_style = "red"
+
+[custom.jj]
+command = "prompt"
+format = "$output"
+ignore_timeout = true
+shell = ["starship-jj", "--ignore-working-copy", "starship"]
+use_stdin = false
+when = true
+
+[git_status]
+disabled = true
+[git_commit]
+disabled = true
+[git_metrics]
+disabled = true
+[git_branch]
+disabled = true
+
+[custom.git_status]
+when = "! jj --ignore-working-copy root"
+command = "starship module git_status"
+style = ""
+description = "Only show git_status if we're not in a jj repo"
+
+[custom.git_commit]
+when = "! jj --ignore-working-copy root"
+command = "starship module git_commit"
+style = ""
+description = "Only show git_commit if we're not in a jj repo"
+
+[custom.git_metrics]
+when = "! jj --ignore-working-copy root"
+command = "starship module git_metrics"
+style = ""
+description = "Only show git_metrics if we're not in a jj repo"
+
+[custom.git_branch]
+when = "! jj --ignore-working-copy root"
+command = "starship module git_branch"
+style = ""
+description = "Only show git_branch if we're not in a jj repo"
+
+[c]
+style = "fg:blue"
+detect_files = ["CMakeLists.txt", "compile_commands.json"]
+disabled = false
+symbol = " "
+
+[nix_shell]
+impure_msg = '[impure shell](bold red)'
+pure_msg = '[pure shell](bold green)'
+unknown_msg = '[unknown shell](bold yellow)'
+format = 'via [ $state( \($name\))](bold blue) '
+
+[rust]
+symbol = " "
+
+[python]
+symbol = " "
+
+[palettes.dracula]
+background = "#282a36"
+current_line = "#44475a"
+foreground = "#f8f8f2"
+comment = "#6272a4"
+cyan = "#8be9fd"
+green = "#50fa7b"
+orange = "#ffb86c"
+pink = "#ff79c6"
+purple = "#bd93f9"
+red = "#ff5555"
+yellow = "#f1fa8c"

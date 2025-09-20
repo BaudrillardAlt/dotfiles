@@ -1,0 +1,12 @@
+"$schema" = "https://jj-vcs.github.io/jj/latest/config-schema.json"
+
+[user]
+name = "BaudilliardAlt"
+email = "230780735+BaudrillardAlt@users.noreply.github.com"
+
+[git]
+push-new-bookmarks = true
+
+[ui]
+diff-formatter = ["difft", "--color=always", "$left", "$right"]
+default-command = ["status", "--no-pager"]

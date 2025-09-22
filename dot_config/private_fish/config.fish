@@ -1,10 +1,3 @@
-if status is-login
-    if test -z "$WAYLAND_DISPLAY"; and set -q XDG_VTNR; and test "$XDG_VTNR" -eq 1; and uwsm check may-start
-        # exec uwsm start -- /usr/bin/niri --session
-        exec uwsm start hyprland-uwsm.desktop
-    end
-end
-
 if status is-interactive
     # set -gx ZELLIJ_AUTO_ATTACH true
     # if not set -q ZELLIJ

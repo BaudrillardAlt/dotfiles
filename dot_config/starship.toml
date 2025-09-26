@@ -1,8 +1,10 @@
 palette = "dracula"
+
 add_newline = false
+
 command_timeout = 1000
 
-format = """$os$directory${custom.jj}${custom.git_branch}${custom.git_status}${custom.git_commit}${custom.git_metrics}$c$lua$zig$python$rust$nix_shell
+format = """$os$directory$git_branch$git_status$c$lua$zig$python$rust$nix_shell
 $character"""
 
 [os]
@@ -30,49 +32,27 @@ format = '[@](bold purple) [$path]($style)[$read_only]($read_only_style) '
 style = "bold purple"
 read_only_style = "red"
 
-[custom.jj]
-command = "prompt"
-format = "$output"
-ignore_timeout = true
-shell = ["starship-jj", "--ignore-working-copy", "starship"]
-use_stdin = false
-when = true
+[git_branch]
+symbol = ""
+format = '[on](text) [$symbol $branch]($style) '
+style = 'bold green'
 
 [git_status]
-disabled = true
-[git_commit]
-disabled = true
-[git_metrics]
-disabled = true
-[git_branch]
-disabled = true
-
-[custom.git_status]
-when = "! jj --ignore-working-copy root"
-command = "starship module git_status"
-style = ""
-description = "Only show git_status if we're not in a jj repo"
-
-[custom.git_commit]
-when = "! jj --ignore-working-copy root"
-command = "starship module git_commit"
-style = ""
-description = "Only show git_commit if we're not in a jj repo"
-
-[custom.git_metrics]
-when = "! jj --ignore-working-copy root"
-command = "starship module git_metrics"
-style = ""
-description = "Only show git_metrics if we're not in a jj repo"
-
-[custom.git_branch]
-when = "! jj --ignore-working-copy root"
-command = "starship module git_branch"
-style = ""
-description = "Only show git_branch if we're not in a jj repo"
+format = '([$all_status$ahead_behind]($style)) '
+style = 'bold green'
+conflicted = '[🏳](red)'
+untracked = '[?](orange)'
+ahead = '[⇡${count}](green)'
+behind = '[⇣${count}](green)'
+diverged = '[⇕⇡${ahead_count}⇣${behind_count}](red)'
+stashed = '[](pink)'
+modified = '[](yellow)'
+staged = '[+](green)'
+renamed = '[»](orange)'
+deleted = '[-](red)'
 
 [c]
-style = "fg:blue"
+style = " fg:blue"
 detect_files = ["CMakeLists.txt", "compile_commands.json"]
 disabled = false
 symbol = " "

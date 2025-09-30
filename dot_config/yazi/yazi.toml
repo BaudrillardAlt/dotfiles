@@ -17,3 +17,6 @@ max_height = 4000
 cache_dir = ""
 ueberzug_scale = 1
 ueberzug_offset = [0, 0, 0, 0]
+
+[opener]
+edit = [{ run = 'nv "$@"', block = true, for = "unix" }]

@@ -611,7 +611,7 @@ web_client {
 // Choose the theme that is specified in the themes section.
 // Default: default
 //
-theme "ao"
+theme "molokai-dark"
 //
 // Choose the base input mode of zellij.
 // Default: normal
@@ -627,7 +627,7 @@ default_shell "/usr/bin/fish"
 // The name of the default layout to load on startup
 // Default: "default"
 //
-default_layout "layout-main"
+default_layout "compact-tabs-top"
 // The folder in which Zellij will look for layouts
 // (Requires restart)
 //

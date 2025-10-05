@@ -2,7 +2,9 @@ if status is-interactive
     set -gx ZELLIJ_AUTO_ATTACH true
     if not set -q ZELLIJ
         if test "$ZELLIJ_AUTO_ATTACH" = true
-            zellij attach --create main
+            if test (pgrep -c footclient) -le 1
+                zellij attach --create main
+            end
         else
             zellij --session main
         end

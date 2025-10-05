@@ -96,6 +96,10 @@ window-rule {
     opacity 0.95
 }
 window-rule {
+    match app-id="zen"
+    open-maximized true
+}
+window-rule {
     match app-id="^org.pulseaudio.pavucontrol$"
     open-floating true
     min-width 900
@@ -116,31 +120,34 @@ window-rule {
     match app-id="neovide"
 }
 window-rule {
-    match app-id=r#"(?i)^zen$"# title=r#"^Picture-in-Picture$"#
-    match app-id=r#"(?i)(pavucontrol|keepass|nm-connection-editor)"#
-    match title=r#".*Extension.*Bitwarden.*"#
+    match app-id="(?i)^zen$" title="^Picture-in-Picture$"
+    match app-id="(?i)(pavucontrol|keepass|nm-connection-editor)"
+    match title=".*Extension.*Bitwarden.*"
     match app-id="xdg-desktop-portal-gtk"
     open-floating true
 }
-
 window-rule {
     geometry-corner-radius 5
     clip-to-geometry true
 }
-
-
 binds {
     Mod+Return hotkey-overlay-title="OpenTerminal" {
         spawn-sh "nirius focus-or-spawn -a foot app2unit-term"
+    }
+    Mod+Ctrl+Return hotkey-overlay-title="OpenTerminal" {
+        spawn-sh "app2unit-term"
     }
     Mod+Shift+Return hotkey-overlay-title="OpenTerminal" {
         spawn-sh "nirius focus-or-spawn -a neovide nv"
     }
     Mod+S hotkey-overlay-title="SendChat" {
-        spawn-sh "sendchat"
+        spawn "sendchat"
     }
-    Mod+B hotkey-overlay-title="OpenBook" {
-        spawn-sh "openbook"
+    Mod+Shift+B hotkey-overlay-title="OpenBook" {
+        spawn "openbook"
+    }
+    Mod+B hotkey-overlay-title="open-bookmark" {
+        spawn "open-bookmark"
     }
     Mod+D hotkey-overlay-title="RunApplication" {
         spawn "fuzzel"
@@ -434,17 +441,23 @@ binds {
         move-column-to-workspace 9
     }
     Mod+BracketLeft {
-        consume-or-expel-window-left
+        focus-column-left-or-last
     }
     Mod+BracketRight {
-        consume-or-expel-window-right
+        focus-column-right-or-first
     }
 
+    Mod+Ctrl+BracketLeft {
+        consume-or-expel-window-left
+    }
+    Mod+Ctrl+BracketRight {
+        consume-or-expel-window-right
+    }
     Mod+Shift+BracketLeft {
-move-column-left-or-to-monitor-left
+        move-column-left-or-to-monitor-left
     }
     Mod+Shift+BracketRight {
-move-column-right-or-to-monitor-right
+        move-column-right-or-to-monitor-right
     }
     // Consume one window from the right to the bottom of the focused column.
     Mod+Comma {
@@ -470,6 +483,10 @@ move-column-right-or-to-monitor-right
         fullscreen-window
     }
     Mod+Z {
+        spawn-sh "app2unit zen-browser"
+    }
+
+    Mod+Shift+Z {
         spawn-sh "nirius focus-or-spawn -a zen app2unit zen-browser"
     }
     // Center all fully visible columns on screen.
@@ -552,9 +569,8 @@ environment {
     DISPLAY ":0"
 }
 prefer-no-csd
-
-spawn-at-startup "app2unit" "-t" "service" "niriusd"
-spawn-at-startup "app2unit" "-t" "service" "wbg" "~/.config/niri/wallpapers/haha.png"
+spawn-sh-at-startup "app2unit -t service niriusd"
+spawn-sh-at-startup "app2unit -t service wbg ~/.config/niri/wallpapers/haha.png"
 spawn-at-startup "app2unit" "-t" "service" "/usr/lib/polkit-kde-authentication-agent-1"
 spawn-at-startup "app2unit" "wl-paste" "--type" "text" "--watch" "cliphist" "store"
 spawn-at-startup "app2unit" "wl-paste" "--type" "image" "--watch" "cliphist" "store"

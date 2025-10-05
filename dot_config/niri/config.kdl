@@ -146,6 +146,22 @@ binds {
     Mod+Shift+B hotkey-overlay-title="OpenBook" {
         spawn "openbook"
     }
+
+Mod+Alt+C hotkey-overlay-title="Calendar" {
+  spawn "launch-webapp" "https://calendar.google.com" "google"
+}
+
+Mod+Alt+D hotkey-overlay-title="Docs" {
+  spawn "launch-webapp" "https://docs.google.com" "google"
+}
+
+Mod+A hotkey-overlay-title="ChatGPT" {
+  spawn "launch-webapp" "https://chatgpt.com" "chatgpt"
+}
+Mod+Shift+A hotkey-overlay-title="ChatGPT" {
+  spawn "launch-webapp" "https://claude.ai" "claude"
+}
+
     Mod+B hotkey-overlay-title="open-bookmark" {
         spawn "open-bookmark"
     }
@@ -522,8 +538,12 @@ binds {
         switch-focus-between-floating-and-tiling
     }
     Mod+W {
-        toggle-column-tabbed-display
+focus-column-left-or-last
     }
+    Mod+Shift+W {
+focus-column-right-or-first
+    }
+
     // Actions to switch layouts.
     // Note: if you uncomment these, make sure you do NOT have
     // a matching layout switch hotkey configured in xkb options above.

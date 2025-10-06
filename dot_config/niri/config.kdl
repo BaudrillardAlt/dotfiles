@@ -24,7 +24,7 @@ input {
         // scroll-method "no-scroll"
 
     }
-    focus-follows-mouse max-scroll-amount="5%"
+    focus-follows-mouse max-scroll-amount="3%"
     workspace-auto-back-and-forth
 }
 output "DP-1" {
@@ -499,11 +499,11 @@ Mod+Shift+A hotkey-overlay-title="ChatGPT" {
         fullscreen-window
     }
     Mod+Z {
-        spawn-sh "app2unit zen-browser"
+        spawn-sh "nirius focus-or-spawn -a zen app2unit zen-browser"
     }
 
     Mod+Shift+Z {
-        spawn-sh "nirius focus-or-spawn -a zen app2unit zen-browser"
+        spawn-sh "app2unit zen-browser"
     }
     // Center all fully visible columns on screen.
     Mod+C {

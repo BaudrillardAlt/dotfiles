@@ -10,4 +10,4 @@ wsl = false
 
 [font]
 normal = ["JetBrainsMono Nerd Font", "Noto Color Emoji"]
-size = 16
+size = 15

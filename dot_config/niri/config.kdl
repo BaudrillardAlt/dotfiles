@@ -109,12 +109,12 @@ window-rule {
     match app-id="foot.yazi"
     open-floating true
     default-column-width {
-        fixed 2400
+        fixed 1600
     }
     default-window-height {
-        fixed 1200
+        fixed 800
     }
-    default-floating-position x=130 y=140
+    default-floating-position x=500 y=300
 }
 window-rule {
     match app-id="neovide"
@@ -147,19 +147,11 @@ binds {
         spawn "openbook"
     }
 
-Mod+Alt+C hotkey-overlay-title="Calendar" {
-  spawn "launch-webapp" "https://calendar.google.com" "google"
-}
-
-Mod+Alt+D hotkey-overlay-title="Docs" {
-  spawn "launch-webapp" "https://docs.google.com" "google"
-}
-
 Mod+A hotkey-overlay-title="ChatGPT" {
-  spawn "launch-webapp" "https://chatgpt.com" "chatgpt"
+  spawn-sh "nirius focus-or-spawn -a chrome-chatgpt create-webapp 'https://chatgpt.com' chatgpt"
 }
-Mod+Shift+A hotkey-overlay-title="ChatGPT" {
-  spawn "launch-webapp" "https://claude.ai" "claude"
+Mod+Shift+A hotkey-overlay-title="Claude" {
+  spawn-sh "nirius focus-or-spawn -a chrome-claude create-webapp 'https://claude.ai' 'claude'"
 }
 
     Mod+B hotkey-overlay-title="open-bookmark" {
@@ -168,8 +160,12 @@ Mod+Shift+A hotkey-overlay-title="ChatGPT" {
     Mod+D hotkey-overlay-title="RunApplication" {
         spawn "fuzzel"
     }
+
+    Mod+Shift+D hotkey-overlay-title="RunApplication" {
+        spawn-sh "launch-webapp"
+    }
     Mod+Grave {
-        switch-focus-between-floating-and-tiling
+        focus-monitor-next
     }
     Mod+Tab hotkey-overlay-title="FocusMarked" {
         focus-column-right-or-first
@@ -189,9 +185,18 @@ Mod+Shift+A hotkey-overlay-title="ChatGPT" {
     Mod+Shift+Escape hotkey-overlay-title="ShowHotkeyOverlay" {
         show-hotkey-overlay
     }
-    Mod+V repeat=false hotkey-overlay-title="ClipboardHistory" {
+
+    // Mod+V repeat=false hotkey-overlay-title="ClipboardHistory" {
+    // }
+    //
+    Mod+C {
         spawn "sh" "-c" "cliphist list | fuzzel --dmenu --width 100 | cliphist decode | wl-copy"
     }
+    Mod+Shift+C {
+        center-visible-columns
+    }
+
+
     Mod+Alt+L hotkey-overlay-title="LockScreen" {
         spawn "swaylock"
     }
@@ -505,10 +510,7 @@ Mod+Shift+A hotkey-overlay-title="ChatGPT" {
     Mod+Shift+Z {
         spawn-sh "app2unit zen-browser"
     }
-    // Center all fully visible columns on screen.
-    Mod+C {
-        center-visible-columns
-    }
+
     // Finer width adjustments.
     // This command can also:
     // * set width in pixels: "1000"
@@ -552,7 +554,7 @@ focus-column-right-or-first
     // Mod+Space       { switch-layout "next"; }
     // Mod+Shift+Space { switch-layout "prev"; }
     Mod+Ctrl+Tab {
-        focus-monitor-next
+        switch-focus-between-floating-and-tiling
     }
     Print {
         screenshot

@@ -9,7 +9,6 @@ keybinds clear-defaults=true {
         bind "Alt Tab" {
             FocusNextPane
         }
-
         bind "Alt w" {
             FocusNextPane
         }

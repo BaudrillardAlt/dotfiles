@@ -15,6 +15,8 @@ if status is-interactive
     zoxide init fish --cmd cd | source
 end
 
+set -gx SUDO_EDITOR 'env -u NVIM_LISTEN_ADDRESS nvim'
+
 abbr -a cp cp -rv
 abbr -a rm rm -rv
 abbr -a dot chezmoi

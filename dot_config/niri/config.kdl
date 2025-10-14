@@ -35,7 +35,7 @@ output "HDMI-A-1" {
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
 layout {
     background-color "transparent"
-    gaps 6
+    gaps 8
     // default-column-display "tabbed"
     always-center-single-column
     center-focused-column "never"
@@ -163,7 +163,7 @@ binds {
         spawn "~/.config/niri/scripts/select_window"
     }
     Mod+Tab hotkey-overlay-title="FocusMarked" {
-        spawn "nirius" "focus-marked"
+        focus-window-previous
     }
     // Mod+Shift+Tab hotkey-overlay-title="focus-column-left-or-last" {
     //
@@ -511,6 +511,9 @@ binds {
     Mod+Equal {
         set-column-width "+10%"
     }
+    Mod+0 {
+        set-column-width "50%"
+    }
     // Finer height adjustments when in column with other windows.
     Mod+Shift+Minus {
         set-window-height "-10%"
@@ -554,9 +557,6 @@ binds {
     // which ensures niri always processes them, even when an inhibitor is active.
     Mod+Escape allow-inhibiting=false {
         toggle-keyboard-shortcuts-inhibit
-    }
-    Mod+Ctrl+Alt+K {
-        spawn-sh "uwsm stop -r niri"
     }
     Mod+Alt+Delete {
         spawn "uwsm" "stop" "-r"

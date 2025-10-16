@@ -48,6 +48,7 @@ layout {
         proportion 0.5
     }
     focus-ring {
+        off
         width 1
         active-gradient from="#ff00ff" to="#ff3333" angle=45 in="oklch increasing hue"
         inactive-color "#000000"
@@ -87,11 +88,25 @@ screenshot-path "~/misc/screenshots/screenshot-%Y-%m-%d-%H-%M-%S.png"
 animations {
     slowdown 0.7
 }
+workspace "main"
+workspace "2"
+workspace "scratch"
+window-rule {
+    match app-id="chrome-chatgpt"
+    match app-id="chrome-claude"
+    open-on-workspace "scratch"
+    open-floating true
+    default-column-width {
+        fixed 1000
+    }
+    default-window-height {
+        fixed 1200
+    }
+}
 window-rule {
     exclude app-id="firefox"
-    exclude app-id="chrome"
     match is-active=false
-    opacity 0.94
+    opacity 0.95
 }
 window-rule {
     match app-id="firefox"
@@ -130,7 +145,7 @@ window-rule {
 }
 binds {
     Mod+Return hotkey-overlay-title="OpenTerminal" {
-        spawn-sh "nirius focus-or-spawn -a foot app2unit-term"
+        spawn-sh "nirius focus-or-spawn -a foot.main -- app2unit footclient -a foot.main"
     }
     Mod+Ctrl+Return hotkey-overlay-title="OpenTerminal" {
         spawn-sh "app2unit-term"
@@ -138,17 +153,23 @@ binds {
     Mod+Shift+Return hotkey-overlay-title="OpenTerminal" {
         spawn-sh "nirius focus-or-spawn -a neovide nv"
     }
-    Mod+S hotkey-overlay-title="SendChat" {
-        spawn "sendchat"
+    Mod+P hotkey-overlay-title="SendChat" {
+        spawn "~/.config/niri/scripts/sendchat"
     }
     Mod+Shift+B hotkey-overlay-title="OpenBook" {
         spawn "openbook"
     }
     Mod+A hotkey-overlay-title="ChatGPT" {
-        spawn-sh "nirius focus-or-spawn -a chrome-chatgpt create-webapp 'https://chatgpt.com' chatgpt"
+        spawn-sh "~/.config/niri/scripts/ns -id chrome-chatgpt.com__-Default -s ~/.config/niri/scripts/spawn-chatgpt -m"
     }
     Mod+Shift+A hotkey-overlay-title="Claude" {
-        spawn-sh "nirius focus-or-spawn -a chrome-claude create-webapp 'https://claude.ai' 'claude'"
+        spawn-sh "~/.config/niri/scripts/ns -id chrome-claude.ai__-Default -s ~/.config/niri/scripts/spawn-claude -m"
+    }
+    Mod+Shift+Period hotkey-overlay-title="scratchpad-toggle" {
+        spawn "nirius" "scratchpad-toggle"
+    }
+    Mod+Period {
+        spawn "nirius" "scratchpad-show"
     }
     Mod+B hotkey-overlay-title="open-bookmark" {
         spawn "open-bookmark"
@@ -163,11 +184,8 @@ binds {
         spawn "~/.config/niri/scripts/select_window"
     }
     Mod+Tab hotkey-overlay-title="FocusMarked" {
-        focus-window-previous
+        focus-column-right-or-first
     }
-    // Mod+Shift+Tab hotkey-overlay-title="focus-column-left-or-last" {
-    //
-    // }
     Mod+Ctrl+M hotkey-overlay-title="send to next monitor" {
         move-window-to-monitor-next
     }
@@ -177,11 +195,11 @@ binds {
     Mod+Shift+Escape hotkey-overlay-title="ShowHotkeyOverlay" {
         show-hotkey-overlay
     }
-    // Mod+V repeat=false hotkey-overlay-title="ClipboardHistory" {
-    // }
-    //
     Mod+C {
         spawn "sh" "-c" "cliphist list | fuzzel --dmenu --width 100 | cliphist decode | wl-copy"
+    }
+    Mod+Ctrl+C {
+        center-column
     }
     Mod+Shift+C {
         center-visible-columns
@@ -291,12 +309,6 @@ binds {
     Mod+Shift+Ctrl+L {
         move-column-to-monitor-right
     }
-    // Alternatively, there are commands to move just a single window:
-    // Mod+Shift+Ctrl+Left  { move-window-to-monitor-left; }
-    // ...
-    // And you can also move a whole workspace to another monitor:
-    // Mod+Shift+Ctrl+Left  { move-workspace-to-monitor-left; }
-    // ...
     Mod+Page_Down {
         focus-workspace-down
     }
@@ -321,9 +333,6 @@ binds {
     Mod+Ctrl+I {
         move-column-to-workspace-up
     }
-    // Alternatively, there are commands to move just a single window:
-    // Mod+Ctrl+Page_Down { move-window-to-workspace-down; }
-    // ...
     Mod+Shift+Page_Down {
         move-workspace-down
     }
@@ -336,12 +345,6 @@ binds {
     Mod+Shift+I {
         move-workspace-up
     }
-    // You can bind mouse wheel scroll ticks using the following syntax.
-    // These binds will change direction based on the natural-scroll setting.
-    //
-    // To avoid scrolling through workspaces really fast, you can use
-    // the cooldown-ms property. The bind will be rate-limited to this value.
-    // You can set a cooldown on any bind, but it's most useful for the wheel.
     Mod+WheelScrollDown cooldown-ms=150 {
         focus-workspace-down
     }
@@ -380,27 +383,11 @@ binds {
     Mod+Ctrl+Shift+WheelScrollUp {
         move-column-left
     }
-    // Similarly, you can bind touchpad scroll "ticks".
-    // Touchpad scrolling is continuous, so for these binds it is split into
-    // discrete intervals.
-    // These binds are also affected by touchpad's natural-scroll, so these
-    // example binds are "inverted", since we have natural-scroll enabled for
-    // touchpads by default.
-    // Mod+TouchpadScrollDown { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02+"; }
-    // Mod+TouchpadScrollUp   { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.02-"; }
-    // You can refer to workspaces by index. However, keep in mind that
-    // niri is a dynamic workspace system, so these commands are kind of
-    // "best effort". Trying to refer to a workspace index bigger than
-    // the current workspace count will instead refer to the bottommost
-    // (empty) workspace.
-    //
-    // For example, with 2 workspaces + 1 empty, indices 3, 4, 5 and so on
-    // will all refer to the 3rd workspace.
     Mod+1 {
-        focus-workspace 1
+        focus-workspace "main"
     }
     Mod+2 {
-        focus-workspace 2
+        focus-workspace "2"
     }
     Mod+3 {
         focus-workspace 3
@@ -424,10 +411,10 @@ binds {
         focus-workspace 9
     }
     Mod+Ctrl+1 {
-        move-column-to-workspace 1
+        move-column-to-workspace "main"
     }
     Mod+Ctrl+2 {
-        move-column-to-workspace 2
+        move-column-to-workspace "2"
     }
     Mod+Ctrl+3 {
         move-column-to-workspace 3
@@ -468,13 +455,8 @@ binds {
     Mod+Shift+BracketRight {
         move-column-right-or-to-monitor-right
     }
-    // Consume one window from the right to the bottom of the focused column.
     Mod+Comma {
         consume-window-into-column
-    }
-    // Expel the bottom window from the focused column to the right.
-    Mod+Period {
-        expel-window-from-column
     }
     Mod+R {
         switch-preset-column-width
@@ -497,14 +479,6 @@ binds {
     Mod+Shift+BackSpace {
         spawn-sh "app2unit firefox-browser"
     }
-    // Finer width adjustments.
-    // This command can also:
-    // * set width in pixels: "1000"
-    // * adjust width in pixels: "-5" or "+5"
-    // * set width as a percentage of screen width: "25%"
-    // * adjust width as a percentage of screen width: "-10%" or "+10%"
-    // Pixel sizes use logical, or scaled, pixels. I.e. on an output with scale 2.0,
-    // set-column-width "100" will make the column occupy 200 physical screen pixels.
     Mod+Minus {
         set-column-width "-10%"
     }
@@ -514,34 +488,22 @@ binds {
     Mod+0 {
         set-column-width "50%"
     }
-    // Finer height adjustments when in column with other windows.
     Mod+Shift+Minus {
         set-window-height "-10%"
     }
     Mod+Shift+Equal {
         set-window-height "+10%"
     }
-    // Move the focused window between the floating and the tiling footout.
     Mod+F {
         toggle-window-floating
     }
     Mod+Shift+F {
         switch-focus-between-floating-and-tiling
     }
-    Mod+W {
-        focus-column-left-or-last
-    }
     Mod+Shift+W {
         focus-column-right-or-first
     }
-    // Actions to switch layouts.
-    // Note: if you uncomment these, make sure you do NOT have
-    // a matching layout switch hotkey configured in xkb options above.
-    // Having both at once on the same hotkey will break the switching,
-    // since it will switch twice upon pressing the hotkey (once by xkb, once by niri).
-    // Mod+Space       { switch-layout "next"; }
-    // Mod+Shift+Space { switch-layout "prev"; }
-    Mod+Ctrl+Tab {
+    Mod+W {
         switch-focus-between-floating-and-tiling
     }
     Print {
@@ -571,9 +533,6 @@ cursor {
 }
 hotkey-overlay {
     skip-at-startup
-}
-environment {
-    DISPLAY ":0"
 }
 xwayland-satellite {
  // off

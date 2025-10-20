@@ -120,6 +120,7 @@ window-rule {
 }
 window-rule {
     match app-id="foot.yazi"
+    match app-id="foot.float"
     open-floating true
     default-column-width {
         fixed 1600
@@ -186,6 +187,10 @@ binds {
     Mod+Tab hotkey-overlay-title="FocusMarked" {
         focus-column-right-or-first
     }
+
+    Mod+Shift+Tab hotkey-overlay-title="FocusMarked" {
+        focus-column-left-or-last
+    }
     Mod+Ctrl+M hotkey-overlay-title="send to next monitor" {
         move-window-to-monitor-next
     }
@@ -198,10 +203,10 @@ binds {
     Mod+C {
         spawn "sh" "-c" "cliphist list | fuzzel --dmenu --width 100 | cliphist decode | wl-copy"
     }
-    Mod+Ctrl+C {
+    Mod+Shift+C {
         center-column
     }
-    Mod+Shift+C {
+    Mod+Ctrl+C {
         center-visible-columns
     }
     Mod+Alt+L hotkey-overlay-title="LockScreen" {
@@ -474,7 +479,7 @@ binds {
         fullscreen-window
     }
     Mod+BackSpace {
-        spawn-sh "nirius focus-or-spawn -a firefox app2unit firefox"
+        spawn-sh "nirius focus-or-spawn -a firefox app2unit firefox-developer-edition"
     }
     Mod+Shift+BackSpace {
         spawn-sh "app2unit firefox-browser"

@@ -12,7 +12,7 @@ if status is-interactive
     set fish_greeting ""
     set fish_key_bindings fish_vi_key_bindings
     starship init fish | source
-    zoxide init fish --cmd cd | source
+    zoxide init fish | source
 end
 
 set -gx SUDO_EDITOR 'env -u NVIM_LISTEN_ADDRESS nvim'

@@ -14,5 +14,5 @@ end
 
 view-default
 set confirm off
-// set output-radix 16
+set output-radix 16
 dashboard registers -style column-major True

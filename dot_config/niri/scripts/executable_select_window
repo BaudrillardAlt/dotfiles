@@ -59,7 +59,7 @@ def select_window(windows: List[Window]) -> Optional[int]:
     
     menu = "\n".join(w.display() for w in windows)
     res = subprocess.run(
-        ["fuzzel", "--dmenu", "--no-icons", "--index", "--width", "40", "--font=JetBrainsMono Nerd Font:size=20"],
+        ["fuzzel", "--dmenu", "--no-icons", "--index", "--width", "40", "--font=JetBrainsMono Nerd Font:size=16"],
         input=menu,
         capture_output=True,
         text=True

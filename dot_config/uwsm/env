@@ -13,7 +13,7 @@ export QT_QPA_PLATFORMTHEME="qt6ct"
 export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
 export _JAVA_AWT_WM_NONREPARENTING="1"
 
-export DISPLAY=:0
+export DISPLAY=":0"
 
 export NV=/tmp/nv
 export NVIM_LISTEN_ADDRESS=/tmp/nv

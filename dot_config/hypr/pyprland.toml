@@ -1,16 +1,19 @@
 [pyprland]
 plugins = [
- "fetch_client_menu",
- "lost_windows",
- "magnify",
- "scratchpads",
- "toggle_special",
- "workspaces_follow_focus",
+  "fetch_client_menu",
+  "lost_windows",
+  "magnify",
+  "scratchpads",
+  "toggle_special",
+  "workspaces_follow_focus",
 ]
 
 [fetch_client_menu]
 engine = "tofi"
 separator = ""
+
+[workspaces_follow_focus]
+max_workspaces = 4
 
 [scratchpads.chatgpt]
 command = "~/architect/scripts/create-webapp 'https://chatgpt.com' chatgpt"

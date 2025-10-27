@@ -5,21 +5,17 @@ plugins = [
   "magnify",
   "scratchpads",
   "toggle_special",
-  "workspaces_follow_focus",
 ]
 
 [fetch_client_menu]
 engine = "tofi"
 separator = ""
 
-[workspaces_follow_focus]
-max_workspaces = 4
-
 [scratchpads.chatgpt]
 command = "~/architect/scripts/create-webapp 'https://chatgpt.com' chatgpt"
 class = "chrome-chatgpt.com__-Default"
 process_tracking = false
-size = "30% 40%"
+size = "40% 40%"
 max_size = "2560px 100%"
 
 [scratchpads.claude]
@@ -27,7 +23,6 @@ command = "~/architect/scripts/create-webapp 'https://claude.ai' claude"
 class = "chrome-claude.ai__-Default"
 process_tracking = false
 size = "30% 40%"
-# position = "50% 0%"
 max_size = "2560px 100%"
 
 

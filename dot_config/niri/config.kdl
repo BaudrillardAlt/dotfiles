@@ -121,6 +121,8 @@ window-rule {
 window-rule {
     match app-id="foot.yazi"
     match app-id="foot.float"
+    match app-id="foot.calculator"
+    
     open-floating true
     default-column-width {
         fixed 1600
@@ -156,6 +158,9 @@ binds {
     }
     Mod+P hotkey-overlay-title="SendChat" {
         spawn "~/.config/niri/scripts/sendchat"
+    }
+    Mod+Shift+P  {
+        spawn "nirius" "toggle-follow-mode"
     }
     Mod+Shift+B hotkey-overlay-title="OpenBook" {
         spawn "openbook"
@@ -528,9 +533,9 @@ binds {
     Mod+Alt+Delete {
         spawn "uwsm" "stop" "-r"
     }
-    Mod+Shift+P {
-        power-off-monitors
-    }
+    // Mod+Shift+P {
+    //     power-off-monitors
+    // }
 }
 cursor {
     xcursor-theme "Bibata-Modern-Classic"

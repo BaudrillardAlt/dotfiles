@@ -26,8 +26,6 @@ export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
 
-export CARGO_HOME="$XDG_DATA_HOME/cargo"
-export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export GOPATH="$XDG_DATA_HOME/go"
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
 
@@ -42,7 +40,7 @@ export PAGER='bat --style=plain --paging always'
 export BAT_PAGER='ov -F -H3'
 export MANPAGER="ov --section-delimiter '^[^\s]' --section-header"
 
-export PATH="$HOME/.local/share/cargo/bin:$HOME/architect/scripts:$PATH"
+export PATH="$HOME/architect/scripts:$PATH"
 
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --highlight-line \

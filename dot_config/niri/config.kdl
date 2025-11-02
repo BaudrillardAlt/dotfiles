@@ -35,7 +35,7 @@ output "HDMI-A-1" {
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
 layout {
     background-color "transparent"
-    gaps 8
+    gaps 6
     // default-column-display "tabbed"
     always-center-single-column
     center-focused-column "never"

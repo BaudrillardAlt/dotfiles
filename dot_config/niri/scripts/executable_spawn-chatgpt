@@ -1,2 +1,2 @@
 #!/bin/sh
-create-webapp 'https://chatgpt.com' chatgpt
+create-webapp 'https://chatgpt.com' ChatGPT

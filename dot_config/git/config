@@ -35,3 +35,5 @@
 
 [includeIf "gitdir:~/dev/embedded/"]
     path = ~/.gitconfig-uni
+[credential]
+	helper = store

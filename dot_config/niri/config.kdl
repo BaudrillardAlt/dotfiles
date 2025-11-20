@@ -6,11 +6,6 @@ input {
         }
         numlock
     }
-    touchpad {
-        tap
-        natural-scroll
-        accel-speed 0.4
-    }
     mouse {
  // natural-scroll
         // accel-speed 0.2

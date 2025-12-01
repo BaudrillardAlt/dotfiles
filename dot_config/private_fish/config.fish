@@ -18,9 +18,8 @@ end
 set -gx SUDO_EDITOR 'env -u NVIM_LISTEN_ADDRESS nvim'
 
 abbr -a cp cp -rv
-abbr -a rm rm -rv
-abbr -a dot chezmoi
-abbr -a s sendchat
+abbr -a rm rm -rvf
+abbr -a che chezmoi
 
 abbr -a n nv
 abbr -a vim nv

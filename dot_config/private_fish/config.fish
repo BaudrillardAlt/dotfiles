@@ -12,7 +12,7 @@ if status is-interactive
     set fish_greeting ""
     set fish_key_bindings fish_vi_key_bindings
     starship init fish | source
-    zoxide init fish | source
+    zoxide init fish --cmd cd | source
 end
 
 set -gx SUDO_EDITOR 'env -u NVIM_LISTEN_ADDRESS nvim'
@@ -34,4 +34,3 @@ abbr -a .... 'cd ../../..'
 abbr -a ..... 'cd ../../../..'
 
 fish_add_path /home/wasd/architect/scripts
-fish_add_path $CARGO_HOME/bin

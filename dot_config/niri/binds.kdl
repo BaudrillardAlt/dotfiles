@@ -1,6 +1,6 @@
 binds {
     Mod+Return hotkey-overlay-title="OpenTerminal" {
-        spawn-sh "nirius focus-or-spawn -a foot.main -- app2unit footclient -a foot.main"
+        spawn-sh "nirius focus-or-spawn -a com.mitchellh.ghostty app2unit-term"
     }
     Mod+Ctrl+Return hotkey-overlay-title="OpenTerminal" {
         spawn-sh "app2unit-term"

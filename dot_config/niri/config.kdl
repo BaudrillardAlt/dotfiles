@@ -102,6 +102,8 @@ window-rule {
 }
 window-rule {
     match app-id="^org.pulseaudio.pavucontrol$"
+    match app-id="^org\\.gnome\\.NautilusPreviewer$"
+    match app-id="^org\\.gnome\\.Nautilus"
     open-floating true
     min-width 900
     min-height 700

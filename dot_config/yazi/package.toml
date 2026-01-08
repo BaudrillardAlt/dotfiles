@@ -21,4 +21,4 @@ hash = "f8530ee84fee95dbcc26bb1d8d8019c7"
 [[flavor.deps]]
 use = "ficd0/ashen:ashen"
 rev = "28ec623"
-hash = "f9aed559dc6820dbc7253253be1bb6d2"
+hash = "ec4555e1d972062f391c397d339915bb"

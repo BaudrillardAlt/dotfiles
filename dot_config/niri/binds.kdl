@@ -38,7 +38,7 @@ binds {
     Mod+Shift+D hotkey-overlay-title="RunApplication" {
         spawn-sh "launch-webapp"
     }
-    Mod+Ctrl+M hotkey-overlay-title="send to next monitor" {
+    Mod+X hotkey-overlay-title="send to next monitor" {
         move-window-to-monitor-next
     }
     Mod+M hotkey-overlay-title="ToggleMark" {

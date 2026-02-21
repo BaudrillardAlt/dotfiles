@@ -12,6 +12,9 @@ export QT_QPA_PLATFORMTHEME="qt6ct"
 export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
 export _JAVA_AWT_WM_NONREPARENTING="1"
 
+
+export TERMINAL=xdg-terminal-exec
+
 export DISPLAY=":0"
 
 export NV=/tmp/nv

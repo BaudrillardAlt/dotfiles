@@ -1,12 +1,14 @@
 font-size = 14
-window-padding-x = 2
-window-padding-y = 5
+window-padding-x = 4
+window-padding-y = 6
 shell-integration = fish
 confirm-close-surface = true
 auto-update = off
 unfocused-split-opacity = 0.7
 focus-follows-mouse
 keybind=clear
+mouse-scroll-multiplier = 0.95
+gtk-toolbar-style = flat
 
 keybind = alt+1=goto_tab:1
 keybind = alt+2=goto_tab:2

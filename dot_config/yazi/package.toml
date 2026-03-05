@@ -22,3 +22,8 @@ hash = "f8530ee84fee95dbcc26bb1d8d8019c7"
 use = "ficd0/ashen:ashen"
 rev = "28ec623"
 hash = "ec4555e1d972062f391c397d339915bb"
+
+[[flavor.deps]]
+use = "yazi-rs/flavors:catppuccin-mocha"
+rev = "3001521"
+hash = "8eabb4e88096f10905a6df62cfaadbf4"

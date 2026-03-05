@@ -47,8 +47,8 @@ layout {
     }
     border {
         width 2
-        active-gradient from="#ff00ff" to="#ff3333" angle=45 in="oklch increasing hue"
-        inactive-color "#000000"
+        active-gradient from="#89b4fa" to="#cba6f7" angle=45
+        inactive-color "#313244"
     }
     tab-indicator {
         active-color "#5ef1ff90"
@@ -103,7 +103,7 @@ window-rule {
 }
 window-rule {
     match app-id="firefox"
-    open-maximized true
+    open-fullscreen true
 }
 window-rule {
     match app-id="^org.pulseaudio.pavucontrol$"
@@ -169,7 +169,7 @@ xwayland-satellite {
 }
 prefer-no-csd
 spawn-sh-at-startup "app2unit -t service niriusd"
-spawn-sh-at-startup "app2unit -t service wbg ~/.config/niri/wallpapers/haha.png"
+spawn-sh-at-startup "app2unit -t service wbg ~/.config/niri/wallpapers/galaxy-waves.jpg"
 spawn-at-startup "app2unit" "-t" "service" "/usr/lib/polkit-kde-authentication-agent-1"
 spawn-at-startup "app2unit" "wl-paste" "--type" "text" "--watch" "cliphist" "store"
 spawn-at-startup "app2unit" "wl-paste" "--type" "image" "--watch" "cliphist" "store"

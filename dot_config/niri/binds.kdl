@@ -1,6 +1,6 @@
 binds {
     Mod+Return hotkey-overlay-title="OpenTerminal" {
-        spawn-sh "nirius focus-or-spawn -a com.mitchellh.ghostty app2unit-term"
+        spawn-sh "nirius focus-or-spawn -a foot app2unit-term"
     }
     Mod+Ctrl+Return hotkey-overlay-title="OpenTerminal" {
         spawn-sh "app2unit-term"
@@ -8,20 +8,17 @@ binds {
     Mod+Shift+Return hotkey-overlay-title="OpenTerminal" {
         spawn-sh "nirius focus-or-spawn -a neovide nv"
     }
-    Mod+P hotkey-overlay-title="SendChat" {
-        spawn "~/.config/niri/scripts/sendchat"
-    }
     Mod+Shift+P {
         spawn "nirius" "toggle-follow-mode"
     }
     Mod+Shift+B hotkey-overlay-title="OpenBook" {
         spawn "openbook"
     }
-    Mod+A hotkey-overlay-title="ChatGPT" {
+    Mod+Shift+A hotkey-overlay-title="ChatGPT" {
         spawn-sh "~/.config/niri/scripts/ns -id chrome-chatgpt.com__-Default -s ~/.config/niri/scripts/spawn-chatgpt -m"
     }
-    Mod+Shift+A hotkey-overlay-title="Claude" {
-        spawn-sh "~/.config/niri/scripts/ns -id chrome-claude.ai__-Default -s ~/.config/niri/scripts/spawn-claude -m"
+    Mod+A hotkey-overlay-title="Claude" {
+        spawn-sh "~/.config/niri/scripts/ns -id com.anthropic.claude-desktop -s claude-desktop"
     }
     Mod+Shift+Period hotkey-overlay-title="scratchpad-toggle" {
         spawn "nirius" "scratchpad-toggle"
@@ -322,7 +319,7 @@ binds {
     Mod+Space {
         spawn "~/.config/niri/scripts/maximize-fill"
     }
-    Mod+Shift+Space {
+    Mod+Ctrl+Space {
         fullscreen-window
     }
     Mod+BackSpace {
@@ -346,7 +343,7 @@ binds {
     Mod+Shift+Equal {
         set-window-height "+10%"
     }
-    Mod+F {
+    Mod+Shift+Space {
         toggle-window-floating
     }
     Mod+Shift+F {

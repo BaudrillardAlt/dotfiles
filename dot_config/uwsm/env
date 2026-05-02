@@ -43,15 +43,3 @@ export BAT_PAGER='ov -F -H3'
 export MANPAGER="ov --section-delimiter '^[^\s]' --section-header"
 
 export PATH="$HOME/architect/scripts:$PATH"
-
-export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
-  --highlight-line \
-  --cycle \
-  --layout=reverse \
-  --height 80% \
-  --color=fg:-1,fg+:#ffffff,bg:-1,bg+:#3c4048 \
-  --color=hl:#5ea1ff,hl+:#5ef1ff,info:#ffbd5e,marker:#5eff6c \
-  --color=prompt:#ff5ef1,spinner:#bd5eff,pointer:#ff5ea0,header:#5eff6c \
-  --color=gutter:-1,border:#3c4048,scrollbar:#7b8496,label:#7b8496 \
-  --color=query:#ffffff \
-"

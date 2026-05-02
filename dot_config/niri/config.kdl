@@ -1,7 +1,7 @@
 include "binds.kdl"
 input {
     mouse {
-        accel-speed 0.3
+        accel-speed 0.4
         accel-profile "flat"
     }
     keyboard {
@@ -18,7 +18,7 @@ input {
     workspace-auto-back-and-forth
 }
 output "DP-1" {
-    mode "2560x1440@74.92"
+    mode "2560x1440@59.951"
     position x=0 y=0
 }
 output "HDMI-A-1" {
@@ -40,10 +40,9 @@ layout {
         proportion 0.5
     }
     focus-ring {
-        off
         width 1
-        active-gradient from="#ff00ff" to="#ff3333" angle=45 in="oklch increasing hue"
-        inactive-color "#000000"
+        active-gradient from="#89b4fa" to="#cba6f7" angle=45
+        inactive-color "#313244"
     }
     border {
         width 2
@@ -61,7 +60,9 @@ layout {
         gradient from="#5ef1ff70" to="#bd5eff70" angle=45
     }
     shadow {
-        softness 30
+        on
+        draw-behind-window false
+        softness 40
         spread 5
         offset x=0 y=5
         color "#0007"
@@ -85,7 +86,7 @@ workspace "2"
 workspace "scratch"
 window-rule {
     match app-id="chrome-chatgpt"
-    match app-id="chrome-claude"
+    match app-id="com.anthropic.claude-desktop"
     open-on-workspace "scratch"
     open-focused false
     open-floating true
@@ -99,11 +100,24 @@ window-rule {
 window-rule {
     exclude app-id="firefox"
     match is-active=false
-    opacity 0.95
+    opacity 0.85
 }
 window-rule {
     match app-id="firefox"
     open-fullscreen true
+}
+window-rule {
+    exclude app-id="firefox"
+    background-effect {
+        blur true
+    }
+}
+blur {
+    // off
+    passes 3
+    offset 3.0
+    noise 0.02
+    saturation 1.5
 }
 window-rule {
     match app-id="^org.pulseaudio.pavucontrol$"
@@ -141,6 +155,7 @@ window-rule {
     clip-to-geometry true
 }
 recent-windows {
+    open-delay-ms 250
     binds {
         Mod+Tab {
             next-window scope="workspace"
@@ -155,6 +170,12 @@ recent-windows {
             previous-window scope="output" filter="app-id"
         }
     }
+    highlight {
+        urgent-color "#AA4869"
+        active-color "#1e66f5"
+        padding 30
+        corner-radius 8
+    }
 }
 cursor {
     xcursor-theme "Bibata-Modern-Classic"
@@ -167,9 +188,36 @@ xwayland-satellite {
  // off
 
 }
+window-rule {
+    match is-floating=true
+    background-effect {
+        xray false
+    }
+}
+layer-rule {
+    match namespace="^launcher$"
+    shadow {
+        on
+    }
+    background-effect {
+        blur true
+    }
+}
+layer-rule {
+    match layer="top"
+    match layer="overlay"
+    background-effect {
+        xray false
+    }
+}
+layer-rule {
+    match namespace="^notifications$"
+    match namespace="^dms:notification-popup$"
+    block-out-from "screencast"
+}
 prefer-no-csd
 spawn-sh-at-startup "app2unit -t service niriusd"
-spawn-sh-at-startup "app2unit -t service wbg ~/.config/niri/wallpapers/galaxy-waves.jpg"
+spawn-sh-at-startup "app2unit -t service wbg ~/.config/niri/wallpapers/leaves.png"
 spawn-at-startup "app2unit" "-t" "service" "/usr/lib/polkit-kde-authentication-agent-1"
 spawn-at-startup "app2unit" "wl-paste" "--type" "text" "--watch" "cliphist" "store"
 spawn-at-startup "app2unit" "wl-paste" "--type" "image" "--watch" "cliphist" "store"

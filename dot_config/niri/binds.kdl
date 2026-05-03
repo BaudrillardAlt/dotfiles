@@ -1,6 +1,6 @@
 binds {
     Mod+Return hotkey-overlay-title="OpenTerminal" {
-        spawn-sh "nirius focus-or-spawn -a foot app2unit-term"
+        spawn-sh "nirius focus-or-spawn -a com.mitchellh.ghostty app2unit-term"
     }
     Mod+Ctrl+Return hotkey-overlay-title="OpenTerminal" {
         spawn-sh "app2unit-term"
@@ -19,6 +19,9 @@ binds {
     }
     Mod+A hotkey-overlay-title="Claude" {
         spawn-sh "~/.config/niri/scripts/ns -id com.anthropic.claude-desktop -s claude-desktop"
+    }
+    Mod+T hotkey-overlay-title="Ticktick" {
+        spawn-sh "~/.config/niri/scripts/ns -id ticktick -s ticktick"
     }
     Mod+Shift+Period hotkey-overlay-title="scratchpad-toggle" {
         spawn "nirius" "scratchpad-toggle"

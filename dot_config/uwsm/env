@@ -43,3 +43,4 @@ export BAT_PAGER='ov -F -H3'
 export MANPAGER="ov --section-delimiter '^[^\s]' --section-header"
 
 export PATH="$HOME/architect/scripts:$PATH"
+export PATH="$HOME/.local/bin:$PATH"

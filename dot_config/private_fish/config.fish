@@ -1,14 +1,14 @@
 if status is-interactive
-    set -gx ZELLIJ_AUTO_ATTACH true
-    if not set -q ZELLIJ
-        if test "$ZELLIJ_AUTO_ATTACH" = true
-            if test (pgrep -c footclient) -le 1
-                zellij attach --create main
-            end
-        else
-            zellij --session main
-        end
-    end
+    # set -gx ZELLIJ_AUTO_ATTACH true
+    # if not set -q ZELLIJ
+    #     if test "$ZELLIJ_AUTO_ATTACH" = true
+    #         if test (pgrep -c footclient) -le 1
+    #             zellij attach --create main
+    #         end
+    #     else
+    #         zellij --session main
+    #     end
+    # end
     set fish_greeting ""
     set fish_key_bindings fish_vi_key_bindings
     starship init fish | source
